@@ -11,3 +11,26 @@ h1{
     white-space: nowrap;
     text-transform: capitalize;
 }
+
+.light{
+    background-color: lightblue;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 23px 40px;
+    width:100%;
+    height: auto;
+    color: black;
+}
+.dark{
+    background-color: darkblue;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 23px 40px;
+    width:100%;
+    height: auto;
+
+}
+
+/* justify-between items-center flex py-5.5 px-4 w-full h-auto */
