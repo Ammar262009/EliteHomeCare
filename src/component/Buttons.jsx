@@ -16,7 +16,7 @@ const Buttons = () => {
   return (
     
     <div>
-        <button onClick={changeTheme} className='m-3 px-4 py-2 bg-amber-500 rounded my-2 active:scale-94'>Change Theme</button>
+        <button onClick={changeTheme} className='cursor-pointer m-3 px-4 py-2 bg-amber-500 rounded my-2 active:scale-94'>Change Theme</button>
     </div>
   )
 }

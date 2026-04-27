@@ -8,10 +8,11 @@ const App = () => {
   const [theme] = useContext(ThemeDataContext)
   let color;
   if(theme=='light'){
-    color = 'bg-black text-white'
+    color = 'bg-white text-black'
   }
   else if(theme == 'dark'){
-    color = 'bg-white text-black'
+    color = 'bg-black text-white'
+    
   }
   
   return (
