@@ -1,0 +1,11 @@
+#HeroImg {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0.95;
+}
+
+@media screen and (max-width: 768px) {
+      body {
+        background-color: lightcoral;
+      }
+    }
