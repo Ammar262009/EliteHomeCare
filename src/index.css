@@ -4,8 +4,53 @@
     opacity: 0.95;
 }
 
-@media screen and (max-width: 768px) {
-      body {
-        background-color: lightcoral;
-      }
-    }
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.pages {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100vh;
+    background: #f1a533;
+    /* slightly darker than header */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    transition: 0.4s ease;
+    z-index: 1000;
+}
+
+.pages.active {
+    right: 0;
+    display: flex;
+}
+
+/* .pages1 Link {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.pages1 Link:hover {
+    color: #ffd700;
+    transform: scale(1.05);
+} */
