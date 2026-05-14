@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { UserRound, Menu, Cross } from 'lucide-react';
 import Navbar from "../common/Navbar";
+import BeforeAfter from "./Before&After";
 
 
 
@@ -30,11 +31,11 @@ const HeroSection = () => {
         setSliderPosition(position);
     };
     return (
-        <div className='bg-[#FFC108] h-screen w-full '>
+        <div className='bg-[#FFC108] h-auto max-h-100vh w-full '>
             <Navbar />
 
 
-            <div className='md:px-10 px-3 h-[80vh] justify-between sm:block md:flex'>
+            <div className='md:px-10 py-4 md:pb-8 px-3 lg:h-[85vh] justify-between sm:block md:flex'>
                 <div className='sm:w-full sm:min-h-[16%] md:w-[20%] mr-1 mt-6 relative flex flex-col'>
                     <div>
                         <div className="lg:w-[58px] lg:h-[58px] md:h-[40px] md:w-[40px] h-[25px] w-[25px] top-[50%] left-6 bg-[#ef4444bb] absolute rounded-full"></div>
@@ -47,7 +48,7 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                <div
+                {/* <div
                     ref={sliderRef}
                     onMouseMove={(e) => {
                         if (e.buttons === 1) {
@@ -112,6 +113,9 @@ const HeroSection = () => {
                             </div>
                         </div>
                     </div>
+                </div> */}
+                <div className="pt-2  pb-4 my-4 md:pb-0 md:my-0 select-none w-full h-[350px] md:h-[500px] sm:h-[450px] md:w-[80%] lg:w-[60%] lg:h-full">
+                    <BeforeAfter before="/Images/HeroImgBefore1.png" after="/Images/HeroImgAfter1.png" title="Living Room Transformation"/>
                 </div>
 
                 <div className='w-[20%] hidden lg:block relative'>
