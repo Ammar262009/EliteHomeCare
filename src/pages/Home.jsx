@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import HeroSection from "../component/Home/HeroSection";
 import PaintingServices from "../component/Home/PaintingServices";
 import Services from "../component/Home/Services";
+import Reviews from "../component/Home/Reviews";
 
 
 
@@ -13,6 +14,7 @@ const Home = () => {
             <HeroSection />
             <PaintingServices />
             <Services />
+            <Reviews />
         </div>
     )
 }
