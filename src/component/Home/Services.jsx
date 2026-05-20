@@ -54,6 +54,29 @@ const features = [
     },
 ];
 
+const containerVariants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.15
+        }
+    }
+};
+
+const cardVariants = {
+    hidden: {
+        opacity: 0,
+        y: 60
+    },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.7,
+            ease: "easeOut"
+        }
+    }
+};
 const Services = () => {
     const [step, setStep] = useState(1);
 
@@ -76,12 +99,23 @@ const Services = () => {
     const progress = (step / 3) * 100;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#d96b06] via-[#ef8b36] to-[#f7a45c] px-4 py-10 md:px-10">
+        <div className="relative overflow-hidden min-h-screen bg-gradient-to-br from-[#d96b06] via-[#ef8b36] to-[#f7a45c] px-4 py-10 md:px-10">
             <div className="mx-auto max-w-7xl">
+                <div className="absolute top-[-120px] left-[-120px] h-[300px] w-[300px] rounded-full bg-white/10 blur-3xl"></div>
+
+                <div className="absolute bottom-[-100px] right-[-100px] h-[280px] w-[280px] rounded-full bg-orange-300/20 blur-3xl"></div>
 
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}>
+                    initial={{ opacity: 0, y: 60 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{
+                        once: false,
+                        amount: 0.2
+                    }}
+                    transition={{
+                        duration: 0.8,
+                        ease: "easeOut"
+                    }}>
                     <h1 className="text-4xl font-bold text-white md:text-6xl">
                         Book Painting Services
                     </h1>
@@ -96,8 +130,11 @@ const Services = () => {
                         <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
-                            transition={{ duration: 0.5 }}
-                            className="h-full rounded-full bg-white"/>
+                            transition={{
+                                duration: 0.8,
+                                ease: "easeInOut"
+                            }}
+                            className="h-full rounded-full bg-white" />
                     </div>
                 </div>
 
@@ -105,24 +142,31 @@ const Services = () => {
 
                     {["Select Service", "Add Details", "Get Quotation"].map(
                         (label, index) => (
-                            <button
+                            <motion.button
                                 key={index}
+                                whileHover={{
+                                    y: -4,
+                                    scale: 1.03
+                                }}
+
+                                whileTap={{
+                                    scale: 0.96
+                                }}
                                 onClick={() => setStep(index + 1)}
                                 className={`rounded-full px-6 py-3 font-semibold transition-all duration-300
                                 
-                                ${
-                                    step === index + 1
-                                        ? "bg-white text-[#d96b06] shadow-xl scale-105"
+                                ${step === index + 1
+                                        ? "bg-white text-[#d96b06] shadow-[0_10px_40px_rgba(255,255,255,0.35)] scale-105"
                                         : "bg-white/20 text-white hover:bg-white/30"
-                                }`} >
+                                    }`} >
                                 {step > index ? (
                                     <Check
                                         className="mr-2 inline"
-                                        size={18}/>
+                                        size={18} />
                                 ) : null}
 
                                 {label}
-                            </button>
+                            </motion.button>
                         )
                     )}
                 </div>
@@ -140,31 +184,42 @@ const Services = () => {
                                 Choose Your Service
                             </h2>
 
-                            <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                            <motion.div
+                                variants={containerVariants}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{
+                                    once: false,
+                                    amount: 0.2
+                                }}
+                                className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"  >
 
                                 {services.map((service, idx) => (
                                     <motion.div
                                         key={idx}
+                                        variants={cardVariants}
                                         whileHover={{
-                                            y: -10,
-                                            scale: 1.03,
+                                            y: -14,
+                                            scale: 1.035,
+                                            rotateX: 4,
+                                            rotateY: 4,
+                                            boxShadow: "0px 30px 60px rgba(0,0,0,0.25)"
                                         }}
                                         whileTap={{ scale: 0.96 }}
                                         onClick={() => {
                                             setSelected(idx);
                                             setStep(2);
                                         }}
-                                        className={`cursor-pointer overflow-hidden rounded-3xl border-4 transition-all
+                                        className={`cursor-pointer overflow-hidden rounded-3xl border-4 transition-all duration-500 transform-gpu
                                         
-                                        ${
-                                            selected === idx
+                                        ${selected === idx
                                                 ? "border-white shadow-[0_0_30px_rgba(255,255,255,0.5)]"
                                                 : "border-transparent"
-                                        }`}>
-                                        <div className="border border-white rounded-2xl"><ServicesCard title={service.title} image={service.image}/></div>
+                                            }`}>
+                                        <div className="border border-white rounded-2xl"><ServicesCard title={service.title} image={service.image} /></div>
                                     </motion.div>
-                                ))} </div> 
-                                </motion.div>)}
+                                ))} </motion.div>
+                        </motion.div>)}
 
                     {step === 2 && (
                         <motion.div
@@ -172,7 +227,7 @@ const Services = () => {
                             initial={{ opacity: 0, x: 40 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -40 }}
-                            className="mt-14 rounded-3xl bg-white/10 p-8 backdrop-blur-lg" >
+                            className="mt-14 rounded-3xl bg-white/10 border border-white/20 shadow-[0_8px_40px_rgba(0,0,0,0.15)] p-8 backdrop-blur-lg" >
                             <h2 className="text-3xl font-bold text-white">
                                 Add Project Details
                             </h2>
@@ -184,7 +239,10 @@ const Services = () => {
                                         House Type
                                     </label>
 
-                                    <select
+                                    <motion.select
+                                        whileFocus={{
+                                            scale: 1.02
+                                        }}
                                         value={houseType}
                                         onChange={(e) =>
                                             setHouseType(e.target.value)
@@ -194,7 +252,7 @@ const Services = () => {
                                         <option>2BHK</option>
                                         <option>3BHK</option>
                                         <option>Villa</option>
-                                    </select>
+                                    </motion.select>
                                 </div>
 
                                 <div>
@@ -202,7 +260,10 @@ const Services = () => {
                                         Wall Condition
                                     </label>
 
-                                    <select
+                                    <motion.select
+                                        whileFocus={{
+                                            scale: 1.02
+                                        }}
                                         value={condition}
                                         onChange={(e) =>
                                             setCondition(e.target.value)
@@ -211,7 +272,7 @@ const Services = () => {
                                         <option>Fresh</option>
                                         <option>Repaint</option>
                                         <option>Repair Needed</option>
-                                    </select>
+                                    </motion.select>
                                 </div>
 
                             </div>
@@ -230,7 +291,7 @@ const Services = () => {
                                     onChange={(e) =>
                                         setArea(e.target.value)
                                     }
-                                    className="mt-4 w-full accent-white" />
+                                    className="mt-4 w-full cursor-pointer accent-white" />
                             </div>
 
                             <button
@@ -256,7 +317,14 @@ const Services = () => {
                                 Based on your selections
                             </p>
 
-                            <div className="mt-8 space-y-4 text-left md:text-center">
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{
+                                    delay: 0.3
+                                }}
+                                className="mt-8 space-y-4 text-left md:text-center"
+                            >
                                 <p>
                                     <strong>Service:</strong>{" "}
                                     {selectedService}
@@ -276,7 +344,7 @@ const Services = () => {
                                     <strong>Area:</strong>{" "}
                                     {area} sq.ft
                                 </p>
-                            </div>
+                            </motion.div>
 
                             <motion.div
                                 initial={{ scale: 0 }}
@@ -285,7 +353,7 @@ const Services = () => {
                                     type: "spring",
                                     stiffness: 120,
                                 }}
-                                className="mt-10 text-5xl font-extrabold text-green-600">
+                                className="mt-10 bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-6xl font-extrabold text-transparent">
                                 ₹ {estimatedCost}
                             </motion.div>
 
@@ -303,7 +371,28 @@ const Services = () => {
                     {features.map((feature, idx) => (
                         <motion.div
                             key={idx}
-                            whileHover={{ y: -8 }}
+                            initial={{ opacity: 0, y: 40 }}
+
+                            whileInView={{
+                                opacity: 1,
+                                y: 0
+                            }}
+
+                            viewport={{
+                                once: false,
+                                amount: 0.2
+                            }}
+
+                            whileHover={{
+                                y: -10,
+                                scale: 1.04,
+                                backgroundColor: "rgba(255,255,255,0.18)"
+                            }}
+
+                            transition={{
+                                duration: 0.5,
+                                delay: idx * 0.12
+                            }}
                             className="rounded-2xl bg-white/10 p-6 text-center text-white backdrop-blur-md" >
                             <div className="flex justify-center">
                                 {feature.icon}

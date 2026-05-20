@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import BeforeAfter from "./Before&After";
+import { motion, AnimatePresence } from "framer-motion";
 
 const portfolioData = {
     interior: [
         {
             title: "2BHK Painting - Pune",
-            image: "/Images/wall Textur.png ",
+            image: "/Images/wall Textur.png",
         },
         {
             title: "Bedroom Painting - Bangalore",
@@ -49,68 +50,152 @@ const tabs = [
 ];
 
 const PaintingServices = () => {
+    const containerVariants = {
+        hidden: {},
+        show: {
+            transition: {
+                staggerChildren: 0.15
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: {
+            opacity: 0,
+            y: 80
+        },
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        }
+    };
     const [activeTab, setActiveTab] = useState("interior");
 
     return (
         <div className="h-auto bg-gradient-to-b from-[#E7A06E] to-[#FF7A00]  px-10 py-12">
 
-            <div className="text-center mb-10">
+            <motion.div
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                    duration: 0.9,
+                    ease: "easeOut"
+                }}
+                viewport={{
+                    once: false,
+                    amount: 0.2
+                }}
+                className="text-center mb-10" >
                 <h1 className="text-white text-2xl md:text-3xl lg:text-5xl font-semibold md:font-bold">
                     Our Painting Portfolio
                 </h1>
                 <p className="text-white text-lg md:text-xl mt-2">
                     Explore our recent painting projects
                 </p>
-            </div>
+            </motion.div>
 
-            
 
-            <div className="flex justify-center mb-12">
+
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.7 }}
+                viewport={{ once: false, amount: 0.2 }}
+                className="flex justify-center mb-12" >
                 <div className="bg-[#B7855D] p-2 rounded-full flex gap-2 shadow-lg">
                     {tabs.map((tab) => (
-                        <button
+                        <motion.button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
+
+                            whileHover={{
+                                y: -2
+                            }}
+
+                            whileTap={{
+                                scale: 0.95
+                            }}
+
+                            layout
+
                             className={`px-6 py-1.5 md:px-8 md:py-3 rounded-full md:font-medium transition-all duration-300 ${activeTab === tab.id
-                                ? "bg-white text-orange-500 scale-105"
+                                ? "bg-white text-orange-500 shadow-lg"
                                 : "text-white hover:bg-white/20"
                                 }`}>
                             {tab.label}
-                        </button>
+                        </motion.button>
                     ))}
                 </div>
-            </div>
+            </motion.div>
 
-
-            {
-                activeTab === "beforeAfter" ? (
-                    <div className="w-full">
-                        <div className="h-[400px] md:h-[550px] sm:h-[500px] md:w-[80%] lg:w-[98%] lg:h-[80vh] select-none flex items-center justify-center mt-5 md:mt-10">
-                            <BeforeAfter before="/Images/HeroImgBefore1.png" after="/Images/HeroImgAfter1.png" title="Living Room Transformation" />
-                        </div>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                        {portfolioData[activeTab].map((item, index) => (
-                            <div
-                                key={index}
-                                className="relative h-[320px] rounded-3xl overflow-hidden group">
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-
-                                <div className="absolute bottom-5 left-5">
-                                    <h2 className="text-white text-xl md:text-2xl font-normal md:font-semibold">
-                                        {item.title}
-                                    </h2>
-                                </div>
+            <AnimatePresence mode="wait">
+                {
+                    activeTab === "beforeAfter" ? (
+                        <motion.div
+                            key="beforeAfter"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.5 }}
+                            className="w-full" >
+                            <div className="h-[400px] md:h-[550px] sm:h-[500px] md:w-[80%] lg:w-[98%] lg:h-[80vh] select-none flex items-center justify-center mt-5 md:mt-10">
+                                <BeforeAfter before="/Images/HeroImgBefore1.png" after="/Images/HeroImgAfter1.png" title="Living Room Transformation" />
                             </div>
-                        ))}
-                    </div>
-                )
-            }
-        </div>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key={activeTab}
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="show"
+                            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+                            {portfolioData[activeTab].map((item, index) => (
+                                <motion.div
+                                    key={index}
+
+                                    variants={cardVariants}
+
+
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: index * 0.15
+                                    }}
+
+                                    whileHover={{
+                                        y: -12,
+                                        scale: 1.02,
+                                        boxShadow: "0px 25px 50px rgba(0,0,0,0.25)"
+                                    }}
+
+                                    className="relative h-[320px] rounded-3xl overflow-hidden group shadow-xl" >
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out" />
+
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            delay: index * 0.2 + 0.3
+                                        }}
+                                        className="absolute bottom-5 left-5">
+                                        <h2 className="text-white text-xl md:text-2xl font-normal md:font-semibold">
+                                            {item.title}
+                                        </h2>
+                                    </motion.div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+
+                    )
+                }</AnimatePresence>
+        </div >
     );
 };
 
