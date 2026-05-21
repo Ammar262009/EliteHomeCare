@@ -99,7 +99,7 @@ const Services = () => {
     const progress = (step / 3) * 100;
 
     return (
-        <div className="relative overflow-hidden min-h-screen bg-gradient-to-br from-[#d96b06] via-[#ef8b36] to-[#f7a45c] px-4 py-10 md:px-10">
+        <div className="relative overflow-hidden h-auto bg-gradient-to-br from-[#d96b06] via-[#ef8b36] to-[#f7a45c] px-4 py-10 md:px-10">
             <div className="mx-auto max-w-7xl">
                 <div className="absolute top-[-120px] left-[-120px] h-[300px] w-[300px] rounded-full bg-white/10 blur-3xl"></div>
 
