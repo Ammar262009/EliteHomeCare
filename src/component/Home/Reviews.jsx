@@ -2,6 +2,34 @@ import React, { useState } from "react";
 import { Star, Quote, CircleAlert } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const containerVariants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.15
+        }
+    }
+};
+
+const cardVariants = {
+    hidden: {
+        opacity: 0,
+        y: 80,
+        scale: 0.9
+    },
+
+    show: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+
+        transition: {
+            duration: 0.7,
+            ease: "easeOut"
+        }
+    }
+};
+
 const testimonials = [
     {
         name: "Virat Kohli",
@@ -67,11 +95,30 @@ const Reviews = () => {
         : testimonials.slice(0, 3);
 
     return (
-        <section className="bg-[#efc0a6] px-4 py-16 md:px-10">
+        <section className="bg-[#efc0a6] relative overflow-hidden px-4 py-16 md:px-10">
 
             <div className="mx-auto max-w-7xl">
 
-                <div>
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        y: 60
+                    }}
+
+                    whileInView={{
+                        opacity: 1,
+                        y: 0
+                    }}
+
+                    viewport={{
+                        once: false,
+                        amount: 0.3
+                    }}
+
+                    transition={{
+                        duration: 0.9,
+                        ease: "easeOut"
+                    }}>
                     <h1 className="text-4xl font-extrabold text-black md:text-6xl">
                         What Our Customers Say
                     </h1>
@@ -80,7 +127,7 @@ const Reviews = () => {
                         Discover why homeowners love
                         Elite Home Care
                     </p>
-                </div>
+                </motion.div>
                 <div className="mt-14 rounded-[40px] border border-white/40 bg-[#f3d2bf]/80 p-6 backdrop-blur-lg md:p-12">
 
                     <div className="text-center">
@@ -94,7 +141,19 @@ const Reviews = () => {
                         </p>
                     </div>
                     <motion.div
-                        layout className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        // layout
+                        // variants={containerVariants}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            duration: 1,
+                            ease: "easeOut"
+                        }}
+                        viewport={{
+                            once: false,
+                            amount: 0.15
+                        }}
+                        className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 
                         <AnimatePresence>
 
@@ -103,14 +162,7 @@ const Reviews = () => {
                                     <motion.div
                                         key={idx}
                                         layout
-                                        initial={{
-                                            opacity: 0,
-                                            y: 40,
-                                        }}
-                                        animate={{
-                                            opacity: 1,
-                                            y: 0,
-                                        }}
+                                        variants={cardVariants}
                                         exit={{
                                             opacity: 0,
                                             scale: 0.8,
@@ -119,20 +171,47 @@ const Reviews = () => {
                                             duration: 0.4,
                                         }}
                                         whileHover={{
-                                            y: -10,
-                                            scale: 1.03,
+                                            y: -16,
+                                            scale: 1.035,
+                                            rotateX: 4,
+                                            rotateY: 4,
+                                            boxShadow: "0px 30px 80px rgba(0,0,0,0.18)"
                                         }}
                                         className="group relative overflow-hidden rounded-3xl bg-white p-8 shadow-xl" >
-                                        <div className="absolute right-5 top-5 text-orange-200">
+                                        <motion.div
+                                            animate={{
+                                                y: [0, -6, 0],
+                                                rotate: [0, 5, 0]
+                                            }}
+
+                                            transition={{
+                                                duration: 4,
+                                                repeat: Infinity,
+                                                ease: "easeInOut"
+                                            }}
+
+                                            className="absolute right-5 top-5 text-orange-200"
+                                        >
                                             <Quote size={40} />
-                                        </div>
+                                        </motion.div>
 
                                         <div className="flex flex-col items-center">
 
-                                            <img
+                                            <motion.img
+                                                whileHover={{
+                                                    scale: 1.12,
+                                                    rotate: 3
+                                                }}
+
+                                                transition={{
+                                                    type: "spring",
+                                                    stiffness: 200
+                                                }}
+
                                                 src={item.image}
                                                 alt={item.name}
-                                                className="h-24 w-24 rounded-full border-4 border-orange-200 object-cover transition duration-500 group-hover:scale-110"/>
+                                                className="h-24 w-24 rounded-full border-4 border-orange-200 object-cover" />
+
 
                                             <h3 className="mt-4 text-2xl font-bold">
                                                 {item.name}
@@ -142,25 +221,43 @@ const Reviews = () => {
 
                                                 {[...Array(5)].map(
                                                     (_, i) => (
-                                                        <Star
-                                                            key={
-                                                                i
-                                                            }
-                                                            size={
-                                                                18
-                                                            }
-                                                            fill={
-                                                                i <
-                                                                item.rating
-                                                                    ? "#f59e0b"
-                                                                    : "none"
-                                                            }
-                                                            color={
-                                                                i <
-                                                                item.rating
-                                                                    ? "#f59e0b"
-                                                                    : "#d1d5db"
-                                                            }/>)  )}
+                                                        <motion.div
+                                                            key={i}
+                                                            viewport={{
+                                                                once: false,
+                                                                amount: 0.3
+                                                            }}
+                                                            initial={{
+                                                                opacity: 0,
+                                                                scale: 0
+                                                            }}
+
+                                                            animate={{
+                                                                opacity: 1,
+                                                                scale: 1
+                                                            }}
+
+                                                            transition={{
+                                                                delay: i * 0.08,
+                                                                type: "spring",
+                                                                stiffness: 200
+                                                            }}>
+                                                            <Star
+                                                                key={i}
+                                                                size={18}
+                                                                fill={
+                                                                    i <
+                                                                        item.rating
+                                                                        ? "#f59e0b"
+                                                                        : "none"
+                                                                }
+                                                                color={
+                                                                    i <
+                                                                        item.rating
+                                                                        ? "#f59e0b"
+                                                                        : "#d1d5db"
+                                                                } />
+                                                        </motion.div>))}
                                             </div>
                                         </div>
 
@@ -179,12 +276,44 @@ const Reviews = () => {
 
                         </AnimatePresence>
                     </motion.div>
-                    <h2 className="mx-auto mt-3 text-gray-500 w-full flex gap-2"><CircleAlert/>Only Premium Users can Submit the Review. These all reviews are for testing purposes.</h2>
+                    <motion.h2
+                        initial={{
+                            opacity: 0
+                        }}
+
+                        whileInView={{
+                            opacity: 1
+                        }}
+
+                        viewport={{
+                            once: false
+                        }}
+
+                        transition={{
+                            delay: 0.4
+                        }}
+
+                        className="mx-auto mt-5 flex w-full items-center gap-2 text-gray-600"
+                    ><CircleAlert />Only Premium Users can Submit the Review. These all reviews are for testing purposes.</motion.h2>
                     <div className="mt-12 flex justify-center">
 
                         <motion.button
+                            animate={{
+                                boxShadow: [
+                                    "0px 0px 0px rgba(255,90,60,0.2)",
+                                    "0px 0px 25px rgba(255,90,60,0.4)",
+                                    "0px 0px 0px rgba(255,90,60,0.2)"
+                                ]
+                            }}
+
+                            transition={{
+                                duration: 2.5,
+                                repeat: Infinity
+                            }}
                             whileHover={{
-                                scale: 1.05,
+                                scale: 1.06,
+                                y: -4,
+                                boxShadow: "0px 20px 40px rgba(255,90,60,0.4)"
                             }}
                             whileTap={{
                                 scale: 0.95,
@@ -201,7 +330,7 @@ const Reviews = () => {
 
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 

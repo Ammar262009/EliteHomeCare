@@ -38,8 +38,12 @@ const HeroSection = () => {
 
             <div className='md:px-10 py-4 md:pb-8 px-3 lg:h-[85vh] justify-between sm:block md:flex'>
                 <motion.div
+                    viewport={{
+                        once: false,
+                        amount: 0.2
+                    }}
                     initial={{ opacity: 0, x: -80 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.9 }}
                     className='sm:w-full sm:min-h-[16%] md:w-[20%] mr-1 mt-6 relative flex flex-col' >
                     <div>
@@ -49,14 +53,14 @@ const HeroSection = () => {
                         <div className="">
                             <motion.h1
                                 initial={{ opacity: 0, y: 40 }}
-                                animate={{ opacity: 1, y: 0 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.8 }}
                                 whileHover={{ scale: 1.03 }}
                                 className='font-bold relative z-[3] leading-tight text-3xl md:text-2xl lg:text-[52px]'
                             >Transform your wall instantly</motion.h1>
                             <motion.p
                                 initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.8 }}
                                 className='text-[24px] relative z-[3] font-medium md:font-light lg:font-normal mt-4 text-[#4b3d1f]'>
                                 Professional painting service at your doorstep
@@ -66,8 +70,12 @@ const HeroSection = () => {
                 </motion.div>
 
                 <motion.div
+                    viewport={{
+                        once: false,
+                        amount: 0.2
+                    }}
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     transition={{
                         duration: 1,
                         ease: "easeOut"
@@ -82,19 +90,23 @@ const HeroSection = () => {
                     <div>
 
                         <motion.div
+                            viewport={{
+                                once: false,
+                                amount: 0.2
+                            }}
                             initial={{ opacity: 0, x: 80 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.9 }}
                             className="lg:w-[58px] lg:h-[58px] md:h-[40px] md:w-[40px] h-[25px] w-[25px] top-[50%] left-6 bg-[#ef4444bb] absolute rounded-full" />
                         <motion.div
                             initial={{ opacity: 0, x: 80 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.9 }}
                             className="w-[64px] h-[124px] absolute top-[43%] right-[7%] bg-[#ef44527e] rounded-[50%_50%_48%_48%/55%_55%_45%_45%]" />
                         <motion.img
                             initial={{ opacity: 0, scale: 0.8, y: 30 }}
 
-                            animate={{
+                            whileInView={{
                                 opacity: 1,
                                 scale: 1,
                                 y: [0, -12, 0],
@@ -126,7 +138,7 @@ const HeroSection = () => {
                         <motion.img
                             initial={{ opacity: 0, scale: 0.8, y: 30 }}
 
-                            animate={{
+                            whileInView={{
                                 opacity: 1,
                                 scale: 1,
                                 y: [0, -12, 0],

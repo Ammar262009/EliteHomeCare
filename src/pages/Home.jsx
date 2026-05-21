@@ -12,7 +12,7 @@ import FAQSection from "../component/Home/FAQSection";
 
 const Home = () => {
     return (
-        <div>
+        <div className="overflow-x-hidden">
             <HeroSection />
             <PaintingServices />
             <Services />

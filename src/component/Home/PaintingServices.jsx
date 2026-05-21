@@ -76,7 +76,7 @@ const PaintingServices = () => {
     const [activeTab, setActiveTab] = useState("interior");
 
     return (
-        <div className="h-auto bg-gradient-to-b from-[#E7A06E] to-[#FF7A00]  px-10 py-12">
+        <div className="h-auto bg-gradient-to-b overflow-x-hidden relative overflow-hidden from-[#E7A06E] to-[#FF7A00]  px-10 py-12">
 
             <motion.div
                 initial={{ opacity: 0, y: 60 }}
@@ -172,7 +172,7 @@ const PaintingServices = () => {
                                         boxShadow: "0px 25px 50px rgba(0,0,0,0.25)"
                                     }}
 
-                                    className="relative h-[320px] rounded-3xl overflow-hidden group shadow-xl" >
+                                    className="relative will-change-transform h-[320px] rounded-3xl overflow-hidden group shadow-xl" >
                                     <img
                                         src={item.image}
                                         alt={item.title}

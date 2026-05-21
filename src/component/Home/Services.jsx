@@ -199,11 +199,9 @@ const Services = () => {
                                         key={idx}
                                         variants={cardVariants}
                                         whileHover={{
-                                            y: -14,
-                                            scale: 1.035,
-                                            rotateX: 4,
-                                            rotateY: 4,
-                                            boxShadow: "0px 30px 60px rgba(0,0,0,0.25)"
+                                            y: -10,
+                                            scale: 1.01,
+                                            boxShadow: "0px 25px 45px rgba(0,0,0,0.18)"
                                         }}
                                         whileTap={{ scale: 0.96 }}
                                         onClick={() => {
@@ -385,7 +383,7 @@ const Services = () => {
 
                             whileHover={{
                                 y: -10,
-                                scale: 1.04,
+                                scale: 1.015,
                                 backgroundColor: "rgba(255,255,255,0.18)"
                             }}
 

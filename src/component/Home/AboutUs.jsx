@@ -53,7 +53,10 @@ const AboutUs = () => {
                     transition={{
                         duration: 0.8,
                     }}
-                    viewport={{ once: true }}
+                    viewport={{
+                        once: false,
+                        amount: 0.4
+                    }}
                     className="relative flex justify-center">
                     <motion.img
                         whileHover={{
@@ -79,7 +82,7 @@ const AboutUs = () => {
                         }}
                         src="/Images/Brush.png"
                         alt="Brush"
-                        className="absolute right-0 top-0 hidden w-28 md:block"/>
+                        className="absolute right-0 top-0 hidden w-28 md:block" />
 
                     <motion.img
                         animate={{
@@ -107,7 +110,10 @@ const AboutUs = () => {
                     transition={{
                         duration: 0.8,
                     }}
-                    viewport={{ once: true }}>
+                    viewport={{
+                        once: false,
+                        amount: 0.4
+                    }}>
 
                     <h1 className="text-5xl font-extrabold leading-tight text-[#8d0000] md:text-7xl">
                         Why Choose Us
