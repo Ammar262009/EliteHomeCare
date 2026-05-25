@@ -13,8 +13,13 @@ const beforeAfterData = [
     },
 ];
 
+
+
+
 const BeforeAfter = (props) => {
+    
     const [sliderPosition, setSliderPosition] = useState(50);
+
     const sliderRef = useRef(null);
 
     const handleMove = (clientX) => {
@@ -42,13 +47,13 @@ const BeforeAfter = (props) => {
             className="relative w-full h-full rounded-3xl overflow-hidden cursor-ew-resize" >
 
             <img
-                src={props.after}
+                src={beforeAfterData?.[props.pathNumber]?.after}
                 alt="after"
                 className="absolute inset-0 w-full h-full object-cover" />
 
 
             <img
-                src={props.before}
+                src={beforeAfterData?.[props.pathNumber]?.before}
                 alt="Before"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{
@@ -75,7 +80,7 @@ const BeforeAfter = (props) => {
                 }} > ||</div>
 
 
-            <div className="absolute bottom-5 left-5 bg-black/40 text-white px-4 py-2 rounded-xl"> {props.title} </div>
+            <div className="absolute bottom-5 left-5 bg-black/40 text-white px-4 py-2 rounded-xl"> {beforeAfterData?.[props.pathNumber]?.title} </div>
         </div>
     );
 };

@@ -198,7 +198,9 @@ const FAQSection = () => {
                             "Clean & Safe Work Process",
                             "5 Year Warranty"
                         ].map((item, index) => (
+                            
                             <motion.li
+                                key={index}
                                 initial={{
                                     opacity: 0,
                                     x: -20

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BeforeAfter from "./Before&After";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const portfolioData = {
     interior: [
@@ -49,7 +50,16 @@ const tabs = [
     { id: "beforeAfter", label: "Before & After" },
 ];
 
+
 const PaintingServices = () => {
+    const [pathNumber, setPathNumber] = useState(1)
+
+    const PrevHandler = () => {
+        setPathNumber((prev) => (prev > 0 ? prev - 1 : prev));
+    }
+    const NextHandler = () => {
+        setPathNumber((prev) => (prev <= 0 ? prev + 1 : prev));
+    }
     const containerVariants = {
         hidden: {},
         show: {
@@ -142,8 +152,27 @@ const PaintingServices = () => {
                             exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ duration: 0.5 }}
                             className="w-full" >
-                            <div className="h-[400px] md:h-[550px] sm:h-[500px] md:w-[80%] lg:w-[98%] lg:h-[80vh] select-none flex items-center justify-center mt-5 md:mt-10">
-                                <BeforeAfter before="/Images/HeroImgBefore1.png" after="/Images/HeroImgAfter1.png" title="Living Room Transformation" />
+                            <div className="w-full">
+                                <div className="h-[400px] md:h-[550px] sm:h-[500px] md:w-[80%] m-auto lg:w-[90%] lg:h-[80vh] select-none flex items-center justify-center mt-5 md:mt-10">
+                                    <BeforeAfter pathNumber={pathNumber} setPathNumber={setPathNumber} />
+                                </div>
+                                <div className="relative py-5 mt-2 ">
+                                    <button
+                                        disabled={pathNumber <= 0}
+                                        onClick={PrevHandler}
+                                        className={`absolute flex items-center justify-center top-0 left-0 w-25 h-20 rounded-4xl bg-gray-500  ${pathNumber <= 0
+                                            ? "bg-gray-400 cursor-not-allowed opacity-50"
+                                            : "bg-gray-400 hover:bg-gray-500"
+                                            }`}><ArrowLeft size={30}/></button>
+
+                                    <button
+                                        disabled={pathNumber == 1}
+                                        onClick={NextHandler}
+                                        className={`absolute flex items-center justify-center top-0 right-0 w-25 h-20 rounded-4xl bg-gray-500  ${pathNumber == 1
+                                            ? "bg-gray-400 cursor-not-allowed opacity-50"
+                                            : "bg-gray-400 hover:bg-gray-500"
+                                            }`}><ArrowRight size={30}/></button>
+                                </div>
                             </div>
                         </motion.div>
                     ) : (

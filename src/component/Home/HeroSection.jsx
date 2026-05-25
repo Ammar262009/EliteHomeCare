@@ -7,6 +7,9 @@ import { motion } from "framer-motion";
 
 
 const HeroSection = () => {
+
+    const [pathNumber, setPathNumber] = useState(0)
+
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768)
     useEffect(() => {
         const handleResize = () => {
@@ -83,7 +86,7 @@ const HeroSection = () => {
                     whileHover={{
                         scale: 1.01
                     }} className="pt-2  pb-4 my-4 md:pb-0 md:my-0 select-none w-full h-[350px] md:h-[500px] sm:h-[450px] md:w-[80%] lg:w-[60%] lg:h-full">
-                    <BeforeAfter before="/Images/HeroImgBefore1.png" after="/Images/HeroImgAfter1.png" title="Living Room Transformation" />
+                    <BeforeAfter pathNumber={pathNumber} setPathNumber={setPathNumber} />
                 </motion.div>
 
                 <div className='w-[20%] hidden lg:block relative'>

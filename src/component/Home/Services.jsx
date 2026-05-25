@@ -321,8 +321,7 @@ const Services = () => {
                                 transition={{
                                     delay: 0.3
                                 }}
-                                className="mt-8 space-y-4 text-left md:text-center"
-                            >
+                                className="mt-8 space-y-4 text-left md:text-center">
                                 <p>
                                     <strong>Service:</strong>{" "}
                                     {selectedService}
