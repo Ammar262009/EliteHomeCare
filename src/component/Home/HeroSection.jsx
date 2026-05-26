@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { UserRound, Menu, Cross } from 'lucide-react';
+import { UserRound, Menu, Cross, ArrowUpRight } from 'lucide-react';
 import Navbar from "../common/Navbar";
 import BeforeAfter from "./Before&After";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 
 
@@ -35,7 +36,7 @@ const HeroSection = () => {
         setSliderPosition(position);
     };
     return (
-        <div className='bg-[#FFC108] h-auto max-h-100vh w-full '>
+        <div className='bg-[#FFC108] h-auto w-full '>
             <Navbar />
 
 
@@ -69,6 +70,13 @@ const HeroSection = () => {
                                 Professional painting service at your doorstep
                             </motion.p>
                         </div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.8 }}
+                            className=" rounded-3xl font-semibold text-xl md:absolute bottom-2 px-4 py-5 my-3 bg-[#ff9797] md:w-23 w-45 lg:w-40">
+                            <Link to='contact' className="flex items-center justify-between"> Book Now   <ArrowUpRight size={29} /></Link>
+                        </motion.div>
                     </div>
                 </motion.div>
 
@@ -87,6 +95,7 @@ const HeroSection = () => {
                         scale: 1.01
                     }} className="pt-2  pb-4 my-4 md:pb-0 md:my-0 select-none w-full h-[350px] md:h-[500px] sm:h-[450px] md:w-[80%] lg:w-[60%] lg:h-full">
                     <BeforeAfter pathNumber={pathNumber} setPathNumber={setPathNumber} />
+
                 </motion.div>
 
                 <div className='w-[20%] hidden lg:block relative'>

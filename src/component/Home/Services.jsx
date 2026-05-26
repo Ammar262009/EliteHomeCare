@@ -11,6 +11,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 import ServicesCard from "./ServicesCard";
+import { Link } from "react-router-dom";
 
 const services = [
     {
@@ -356,7 +357,7 @@ const Services = () => {
 
                             <button
                                 className="mt-10 rounded-full bg-[#d96b06] px-10 py-4 text-lg font-bold text-white transition hover:scale-105">
-                                Book Now
+                                <Link to='contact'>Book Now</Link>
                             </button>
                         </motion.div>
                     )}
