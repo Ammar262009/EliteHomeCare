@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Phone,
     Mail,
@@ -68,6 +68,46 @@ const features = [
 ];
 
 const ContactUs = () => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [mobile, setMobile] = useState('')
+    const [service, setService] = useState('')
+    const [desc, setDesc] = useState('')
+
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+
+        setError("")
+        setSuccess("")
+
+        if (!name || !email || !mobile || !desc) {
+            setError("Please fill all the fields")
+            return
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+        if (!emailRegex.test(email)) {
+            setError("Please enter a valid email")
+            return
+        }
+
+        if (mobile.length < 10) {
+            setError("Please enter a valid mobile number")
+            return
+        }
+
+        setSuccess("Message submitted successfully!")
+
+        setName("")
+        setEmail("")
+        setMobile("")
+        setService("")
+        setDesc("")
+    }
     return (
         <div className="w-full overflow-hidden bg-[#f6f4ef]">
             <Navbar />
@@ -84,7 +124,7 @@ const ContactUs = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -80 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, }}
                         transition={{ duration: 0.8 }}>
                         <p className="font-semibold uppercase tracking-[3px] text-orange-500">
                             We're Here To Help
@@ -122,71 +162,103 @@ const ContactUs = () => {
                     <motion.div
                         initial={{ opacity: 0, x: 80 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, }}
                         transition={{ duration: 0.8 }}
-                        className="rounded-[40px] border border-white/40 bg-white/80 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl"
-                    >
+                        className="rounded-[40px] border border-white/40 bg-white/80 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
                         <h2 className="text-3xl font-bold">
                             Send Us a Message
                         </h2>
 
                         <div className="mt-3 h-1 w-20 rounded-full bg-orange-500"></div>
+                        <form onSubmit={submitHandler}>
+                            <div className="mt-8 grid gap-5 sm:grid-cols-2">
 
-                        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+                                <motion.input
+                                    whileFocus={{ scale: 1.02 }}
+                                    type="text"
+                                    onChange={(e) => {
+                                        setName(e.target.value)
+                                    }}
+                                    value={name}
+                                    required
+                                    placeholder="Your Name"
+                                    className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500" />
 
-                            <motion.input
-                                whileFocus={{ scale: 1.02 }}
-                                type="text"
-                                placeholder="Your Name"
-                                className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500"
-                            />
+                                <motion.input
+                                    whileFocus={{ scale: 1.02 }}
+                                    type="email"
+                                    onChange={(e) => {
+                                        setEmail(e.target.value)
+                                    }}
+                                    value={email}
+                                    required
+                                    placeholder="Your Email"
+                                    className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500" />
 
-                            <motion.input
-                                whileFocus={{ scale: 1.02 }}
-                                type="email"
-                                placeholder="Your Email"
-                                className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500"
-                            />
+                                <motion.input
+                                    whileFocus={{ scale: 1.02 }}
+                                    type="tel"
+                                    onChange={(e) => {
+                                        setMobile(e.target.value)
+                                    }}
+                                    value={mobile}
+                                    required
+                                    placeholder="Phone Number"
+                                    className="rounded-2xl border overflow-y-hidden border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500 sm:col-span-2" />
 
-                            <motion.input
-                                whileFocus={{ scale: 1.02 }}
-                                type="text"
-                                placeholder="Phone Number"
-                                className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500 sm:col-span-2"
-                            />
+                                <motion.select
+                                    whileFocus={{ scale: 1.02 }}
+                                    required
+                                    onChange={(e) => {
+                                        setService(e.target.value)
+                                    }}
+                                    className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500 sm:col-span-2">
 
-                            <motion.select
-                                whileFocus={{ scale: 1.02 }}
-                                className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500 sm:col-span-2"
+                                    <option>Interior Painting</option>
+                                    <option>Exterior Painting</option>
+                                    <option>Water Proofing</option>
+                                    <option>Rental Painting</option>
+                                </motion.select>
+
+                                <motion.textarea
+                                    whileFocus={{ scale: 1.01 }}
+                                    rows={5}
+                                    value={desc}
+                                    onChange={(e) => {
+                                        setDesc(e.target.value)
+                                    }}
+                                    placeholder="Your Message"
+                                    className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500 sm:col-span-2"
+                                ></motion.textarea>
+                            </div>
+
+                            {error && (
+                                <p className="mt-4 rounded-xl bg-red-100 p-4 text-sm font-medium text-red-600">
+                                    {error}
+                                </p>
+                            )}
+
+                            {success && (
+                                <p className="mt-4 rounded-xl bg-green-100 p-4 text-sm font-medium text-green-600">
+                                    {success}
+                                </p>
+                            )}
+
+                            <motion.button
+                                type="submit"
+                                whileHover={{
+                                    scale: 1.03,
+                                    y: -3,
+                                }}
+                                whileTap={{
+                                    scale: 0.96,
+                                }}
+                                className="mt-8 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-5 text-lg font-bold text-white shadow-xl"
                             >
-                                <option>Select Service</option>
-                                <option>Interior Painting</option>
-                                <option>Exterior Painting</option>
-                                <option>Water Proofing</option>
-                                <option>Rental Painting</option>
-                            </motion.select>
-
-                            <motion.textarea
-                                whileFocus={{ scale: 1.01 }}
-                                rows={5}
-                                placeholder="Your Message"
-                                className="rounded-2xl border border-gray-300 bg-white px-5 py-4 outline-none transition focus:border-orange-500 sm:col-span-2"
-                            ></motion.textarea>
-                        </div>
-
-                        <motion.button
-                            whileHover={{
-                                scale: 1.03,
-                                y: -3,
-                            }}
-                            whileTap={{
-                                scale: 0.96,
-                            }}
-                            className="mt-8 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-5 text-lg font-bold text-white shadow-xl"
-                        >
-                            <Send size={20} />
-                            Send Message
-                        </motion.button>
+                                <Send size={20} />
+                                Send Message
+                            </motion.button>
+                        </form>
 
                         <div className="mt-5 flex items-center justify-center gap-2 text-sm text-gray-500">
                             <ShieldCheck size={18} />
@@ -203,7 +275,7 @@ const ContactUs = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 60 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, }}
                         transition={{ duration: 0.7 }}
                         className="rounded-[35px] bg-[#f8f1df] p-8 shadow-lg">
                         <h3 className="text-3xl font-bold">
@@ -239,7 +311,7 @@ const ContactUs = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 60 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true }}
                         transition={{ delay: 0.1, duration: 0.7 }}
                         className="rounded-[35px] bg-[#f8f1df] p-8 shadow-lg"
                     >
@@ -291,7 +363,7 @@ const ContactUs = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 60 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true }}
                         transition={{ delay: 0.2, duration: 0.7 }}
                         className="rounded-[35px] bg-[#f8f1df] p-8 shadow-lg"
                     >
@@ -334,7 +406,7 @@ const ContactUs = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.7 }}
                     className="grid gap-6 rounded-[35px] bg-[#f8f1df] p-8 md:grid-cols-2 lg:grid-cols-4">
                     {features.map((item, idx) => {

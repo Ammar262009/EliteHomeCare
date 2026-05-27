@@ -112,7 +112,7 @@ const Reviews = () => {
 
                     viewport={{
                         once: false,
-                        amount: 0.3
+                        amount: 0.2
                     }}
 
                     transition={{
@@ -225,7 +225,7 @@ const Reviews = () => {
                                                             key={i}
                                                             viewport={{
                                                                 once: false,
-                                                                amount: 0.3
+                                                                amount: 0.2 
                                                             }}
                                                             initial={{
                                                                 opacity: 0,

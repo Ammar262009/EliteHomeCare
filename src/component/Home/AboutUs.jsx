@@ -4,9 +4,11 @@ import {
     Clock3,
     PaintBucket,
     ArrowRight,
+    ArrowUpRight,
 } from "lucide-react";
 
-import { motion } from "framer-motion";
+import { motion, scale } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const features = [
     {
@@ -55,7 +57,7 @@ const AboutUs = () => {
                     }}
                     viewport={{
                         once: false,
-                        amount: 0.4
+                        amount: 0.2
                     }}
                     className="relative flex justify-center">
                     <motion.img
@@ -112,14 +114,14 @@ const AboutUs = () => {
                     }}
                     viewport={{
                         once: false,
-                        amount: 0.4
+                        amount: 0.2
                     }}>
 
                     <h1 className="text-5xl font-extrabold leading-tight text-[#8d0000] md:text-7xl">
                         Why Choose Us
                     </h1>
 
-                    <p className="mt-5 text-xl text-[#5f3a2b] md:text-2xl">
+                    <p className="mt-4 text-xl text-[#5f3a2b] md:text-2xl">
                         Experienced professionals.
                         Exceptional results.
                     </p>
@@ -151,9 +153,23 @@ const AboutUs = () => {
                                     </div>
                                 </motion.div>
                             ))}
-
                         </div>
                     </div>
+                    <motion.div
+                        whileHover={{
+                            scale: 1.1,
+                            y: -2
+                        }}
+                        whileTap={{
+                            scale: 0.95,
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            repeat: Infinity
+                        }}
+                        className="rounded-3xl bg-[#ff9797] px-5 mx-auto text-black w-47 mt-5 py-4 text-2xl font-semibold">
+                        <Link className="flex align-center justify-center gap-2" to='about'>About Us <ArrowUpRight size={29} /></Link>
+                    </motion.div>
 
 
                 </motion.div>

@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 
 
 const FeaturesCard = ({ icon: Icon, title, desc }) => {
-    console.log(title);
     return (
         <div><motion.div
             whileHover={{
