@@ -10,7 +10,6 @@ const App = () => {
   return (
     <Routes>
       <Route path='/' element={<Home />}/>
-      {/* create contact us page */}
       <Route path='/contact' element={<ContactUs />}/>
     </Routes>
   )

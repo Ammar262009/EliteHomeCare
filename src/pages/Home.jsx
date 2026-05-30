@@ -7,6 +7,7 @@ import Services from "../component/Home/Services";
 import Reviews from "../component/Home/Reviews";
 import AboutUs from "../component/Home/AboutUs";
 import FAQSection from "../component/Home/FAQSection";
+import Footer from "../component/common/Footer";
 
 
 
@@ -19,6 +20,7 @@ const Home = () => {
             <Reviews />
             <AboutUs />
             <FAQSection />
+            <Footer />
         </div>
     )
 }
