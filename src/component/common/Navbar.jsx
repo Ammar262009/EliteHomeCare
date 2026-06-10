@@ -54,7 +54,7 @@ const Navbar = () => {
                 </NavLink>
 
                 <NavLink
-                    to='/products'
+                    to='/product'
                     className={({ isActive }) =>
                         `w-auto rounded-full text-center items-center justify-center px-9 flex transition-all duration-300
                         ${isActive
