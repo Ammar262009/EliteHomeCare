@@ -71,7 +71,7 @@ const AboutUs = () => {
                         }}
                         src="/Images/Painter.png"
                         alt="Painter"
-                        className="relative z-10 w-[100%] drop-shadow-[0_20px_30px_rgba(0,0,0,0.25)] md:w-[90%]" />
+                        className="relative z-10 w-full drop-shadow-[0_20px_30px_rgba(0,0,0,0.25)] md:w-[90%]" />
 
                     <motion.img
                         animate={{
